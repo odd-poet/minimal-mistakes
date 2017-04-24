@@ -1,0 +1,111 @@
+---
+layout: single
+title: "bash tips"
+date: 2012-07-16 03:29
+comments: true
+tags: [bash]
+---
+
+bash scripting 관련 조각팁 모음 (updated 2012-07-19)
+
+<!-- more -->
+
+`${var1:-var2}`
+-----------
+
+bash script에 `${VAR1:-VAR2}` 의 표현을 종종 봤는데 오늘에야 뭔지 알았다.
+
+다른 스크립트 언어에서 `var1 || var2` 형태와 같은 표현이다.
+
+```bash
+	${TM_MARKDOWN:-markdown.pl} $filename
+	# TM_MARKDOWN이 정의되어 있지 않으면 'markdown.pl'을 실행.
+
+	INPUT=${INPUT:-$DEFAULT}
+	# INPUT이 정의되어 있지 않으면 DEFAULT 값을 쓰라는..
+	# 다른 언어에서 'input ||= default' 과 같은 의미임.
+```
+
+`source script.sh` or `. script.sh`
+---------
+
+`source` 명령은 현재 프로세스에서 다른 스크립트를 실행하는 명령이다.
+현재 프로세스에서 실행하므로 스크립트에 의한 환경변수들의 생성/수정에 영향을 받게 된다.
+주의할 점은 shebang[^1]은 무시된다는 점이다.
+
+[^1]: 스크립트 첫 라인의 `#!/bin/bash` 같은 command를 지정하는 주석라인
+
+일반적으로 다른 스크립트 파일을 include하는데에 사용한다. 혹은 `.bashrc` 같은 파일을 수정했을때
+다시 로그인 하지 않고 `source .bashrc` 와 같은 방법으로 다시 `.bashrc`를 로딩한다.
+
+`source script.sh`대신 `. script.sh`로 줄여 쓸 수 있다.
+
+cursor 제어
+---------
+
+`tput` 명령을 이용해서 cursor를 제어할 수 있다.
+
+`tput sc`
+: 현재 커서 위치 저장
+
+`tput rc`
+: 커서 위치 복구 (저장했던 위치로 커서가 이동함)
+
+`tput cub1`
+: 커서를 왼쪽으로 한칸 이동한다.
+
+`tput cuf1`
+: 커서를 오른쪽으로 한칸 이동한다.
+
+`tput ll`
+: 마지막 라인의 첫번째 위치로 이동한다.
+
+`tput ed`
+: 현재 위치부터 화면 마지막 까지 clear한다.
+
+`tput lines`
+: 터미널의 라인 수를 출력한다.
+
+`tput cols`
+: 터미널의 컬럼 수를 출력한다.
+
+* 참고 : [Colours and Cursor Movement With tput](http://tldp.org/HOWTO/Bash-Prompt-HOWTO/x405.html)
+
+color 제어
+--------
+
+`tput`을 이용해서도 터미널 컬러 제어가 가능하지만 `echo -e`와 escape를 이용하는것이 보다 편하다.
+
+`\x1b` 대신 `\e`나 `\033`를 사용해도 되지만 mac osx에서 `\e`는 정상작동하지 않는다.
+그리고 출력시에는 `echo -e `로 출력해야 한다.
+
+```bash
+black="\x1b[30m"
+red="\x1b[31m"
+green="\x1b[32m"
+yellow="\x1b[33m"
+blue="\x1b[34m"
+magenta="\x1b[35m"
+cyan="\x1b[36m"
+white="\x1b[37m"
+color_off="\x1b[39m"
+
+bg_black="\x1b[40m"
+bg_red="\x1b[41m"
+bg_green="\x1b[42m"
+bg_yellow="\x1b[43m"
+bg_blue="\x1b[44m"
+bg_magenta="\x1b[45m"
+bg_cyan="\x1b[46m"
+bg_white="\x1b[47m"
+bg_color_off="\x1b[49m"
+
+bold="\x1b[1m"
+bold_off="\x1b[22m"
+underline="\x1b[4m"
+underline_off="\x1b[24m"
+
+echo -e "${red}Hello${color_off} ${bg_yellow}World${bg_color_off}"
+```
+
+* 참고 : [ANSI Escape Sequences: Colours and Cursor Movement](http://www.linuxselfhelp.com/howtos/Bash-Prompt/Bash-Prompt-HOWTO-6.html)

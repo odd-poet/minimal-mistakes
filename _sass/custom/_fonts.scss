@@ -1,0 +1,33 @@
+/*
+   Fonts
+   ========================================================================== */
+/* Fira Code : monospace */
+@font-face {
+  font-family: 'Fira Code';
+  src: url('../fonts/FiraCode-Regular.eot');
+  src: local('Fira Code'),
+      url('../fonts/FiraCode-Regular.eot') format('embedded-opentype'),
+      url('../fonts/FiraCode-Regular.woff2') format('woff2'),
+      url('../fonts/FiraCode-Regular.woff') format('woff'),
+      url('../fonts/FiraCode-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+};
+
+@font-face {
+  font-family: 'Nanum Barun Gothic';
+  font-style: normal;
+  font-weight: 400;
+  src: url('../fonts/NanumBarunGothic.eot');
+  src: local('Nanum Barun Gothic'),
+      local('NanumBarunGothic'),
+      local('NanumBarunGothicOTF'),
+      url('../fonts/NanumBarunGothic.eot') format('embedded-opentype'),
+      url('../fonts/NanumBarunGothic.woff2') format('woff2'),
+      url('../fonts/NanumBarunGothic.woff') format('woff'),
+      url('../fonts/NanumBarunGothic.ttf') format('truetype');
+};
+
+// override variables
+$sans-serif : "Nanum Barun Gothic", $sans-serif;
+$monospace : "Fira Code", $monospace;
