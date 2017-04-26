@@ -10,3 +10,6 @@ group :jekyll_plugins do
   gem "jekyll-feed"
   gem "jemoji"
 end
+
+# octopress : https://github.com/octopress/octopress
+gem 'octopress', '~> 3.0'
