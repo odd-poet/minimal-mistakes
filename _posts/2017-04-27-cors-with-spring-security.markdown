@@ -86,6 +86,6 @@ CORS semantic 상으로 CORS prefight에는 `Authorization` 헤더를 줄 이유
   - preflight 요청의 캐시 시간.
 
 References
-- http://stackoverflow.com/questions/36968963/how-to-configure-cors-in-a-spring-boot-spring-security-application/37610988#37610988
-- http://docs.spring.io/spring-security/site/docs/current/reference/html/cors.html
-- http://docs.spring.io/spring/docs/current/spring-framework-reference/html/cors.html
+- [http://stackoverflow.com/questions/36968963/how-to-configure-cors-in-a-spring-boot-spring-security-application/37610988#37610988]
+- [http://docs.spring.io/spring-security/site/docs/current/reference/html/cors.html]
+- [http://docs.spring.io/spring/docs/current/spring-framework-reference/html/cors.html]
